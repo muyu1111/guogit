@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.springcloud.mapper.DeptMapper">
+    <!--添加操作-->
+    <insert id="addDept"  parameterType="com.sun.springcloud.pojo.Dept">
+    insert into dept (dname,dbSource)
+     values (#{dname},DATABASE())
+</insert>
+    <!--刪除操作-->
+    <delete id="deleteId" parameterType="Long">
+        delete from dept where deptno = #{id}
+    </delete>
+    <!--根據id進行查詢-->
+    <select id="queryDeptById" parameterType="Long" resultType="com.sun.springcloud.pojo.Dept">
+     select * from dept where deptno = #{deptno}
+    </select>
+    <!--查询所有-->
+    <select id="queryAll" resultType="com.sun.springcloud.pojo.Dept">
+      select  * from dept
+    </select>
+    <insert id="addIDs" parameterType="java.util.List">
+        insert into dept (dname,dbSource) values
+        <foreach collection="list" item="dname" separator=",">
+         (#{dname},DATABASE())
+        </foreach>
+    </insert>
+</mapper>
